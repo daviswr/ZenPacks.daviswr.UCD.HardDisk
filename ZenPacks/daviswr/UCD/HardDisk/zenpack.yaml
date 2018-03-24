@@ -1,0 +1,112 @@
+name: ZenPacks.daviswr.UCD.HardDisk
+
+device_classes:
+  /Server/Linux:
+    templates:
+      HardDisk:
+        targetPythonClass: Products.ZenModel.HardDisk
+        description: Block device performance using 64-bit SNMPv2 values from UCD-DISKIO-MIB
+        datasources:
+          diskIONReadX:
+            type: SNMP
+            oid: .1.3.6.1.4.1.2021.13.15.1.1.12
+            datapoints:
+              diskIONReadX:
+                description: The number of bytes read from this device since boot.
+                rrdtype: DERIVE
+                rrdmin: 0
+
+          diskIONWrittenX:
+            type: SNMP
+            oid: .1.3.6.1.4.1.2021.13.15.1.1.13
+            datapoints:
+              diskIONWrittenX:
+                description: The number of bytes written to this device since boot.
+                rrdtype: DERIVE
+                rrdmin: 0
+
+          diskIOReads:
+            type: SNMP
+            oid: .1.3.6.1.4.1.2021.13.15.1.1.5
+            datapoints:
+              diskIOReads:
+                description: The number of read accesses from this device since boot.
+                rrdtype: DERIVE
+                rrdmin: 0
+
+          diskIOWrites:
+            type: SNMP
+            oid: .1.3.6.1.4.1.2021.13.15.1.1.6
+            datapoints:
+              diskIOWrites:
+                description: The number of write accesses to this device since boot.
+                rrdtype: DERIVE
+                rrdmin: 0
+
+          diskIOLA1:
+            type: SNMP
+            oid: .1.3.6.1.4.1.2021.13.15.1.1.9
+            datapoints:
+              diskIOLA1:
+                description: The 1 minute average load of disk (%)
+                rrdtype: DERIVE
+                rrdmin: 0
+
+          diskIOLA5:
+            type: SNMP
+            oid: .1.3.6.1.4.1.2021.13.15.1.1.10
+            datapoints:
+              diskIOLA5:
+                description: The 5 minute average load of disk (%)
+                rrdtype: DERIVE
+                rrdmin: 0
+
+        graphs:
+          DEFAULTS:
+            height: 100
+            width: 100
+            miny: 0
+
+          Load:
+            units: percentage
+            maxy: 100
+            graphpoints:
+              1-minute avg load:
+                dpName: diskIOLA1_diskIOLA1
+                lineType: AREA
+                stacked: true
+                colorindex: 0
+
+              5-minute avg load:
+                dpName: diskIOLA5_diskIOLA5
+                lineType: LINE
+                lineWidth: 1
+                colorindex: 1
+
+          Activity:
+            units: IOPS
+            graphpoints:
+              Writes:
+                dpName: diskIOWrites_diskIOWrites
+                lineType: AREA
+                stacked: true
+                colorindex: 0
+              Reads:
+                dpName: diskIOReads_diskIOReads
+                lineType: LINE
+                lineWidth: 1
+                colorindex: 1
+
+          Throughput:
+            units: bytes/sec
+            graphpoints:
+              Written:
+                dpName: diskIONWrittenX_diskIONWrittenX
+                lineType: AREA
+                stacked: true
+                colorindex: 0
+              Read:
+                dpName: diskIONReadX_diskIONReadX
+                lineType: LINE
+                lineWidth: 1
+                colorindex: 1
