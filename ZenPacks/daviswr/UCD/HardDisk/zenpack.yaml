@@ -99,6 +99,7 @@ device_classes:
 
           Throughput:
             units: bytes/sec
+            base: true
             graphpoints:
               Written:
                 dpName: diskIONWrittenX_diskIONWrittenX
