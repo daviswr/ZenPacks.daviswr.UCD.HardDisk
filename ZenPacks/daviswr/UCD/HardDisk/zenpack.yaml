@@ -64,7 +64,7 @@ device_classes:
         graphs:
           DEFAULTS:
             height: 100
-            width: 100
+            width: 500
             miny: 0
 
           Load:
