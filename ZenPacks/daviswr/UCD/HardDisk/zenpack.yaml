@@ -49,8 +49,7 @@ device_classes:
             datapoints:
               diskIOLA1:
                 description: The 1 minute average load of disk (%)
-                rrdtype: DERIVE
-                rrdmin: 0
+                rrdtype: GAUGE
 
           diskIOLA5:
             type: SNMP
@@ -58,8 +57,7 @@ device_classes:
             datapoints:
               diskIOLA5:
                 description: The 5 minute average load of disk (%)
-                rrdtype: DERIVE
-                rrdmin: 0
+                rrdtype: GAUGE
 
         graphs:
           DEFAULTS:
